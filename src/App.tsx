@@ -5,7 +5,7 @@ import { Home } from './Pages/Home Page/Home';
 
 function App() {
   const router=createBrowserRouter([
-    {path:"/:id", element:<Home/>}
+    {path:"/:id/:username", element:<Home/>}
   ]);
   return (
     <RouterProvider router={router}></RouterProvider>

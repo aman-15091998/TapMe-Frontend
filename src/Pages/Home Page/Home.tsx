@@ -12,13 +12,13 @@ import { useParams } from 'react-router-dom';
 export const Home=()=>{
     const dispatch=useDispatch();
     const params=useParams();
-    const {id, balance, power, level}=useSelector(userSelector);
+    const {id, balance, power, level, level_target}=useSelector(userSelector);
     const { loading, error, data, refetch } = useQuery(GET_USER, {
-        variables: { id: '123' },
+        variables: { id: params.id || '123', username: params.username || "user" },
         skip: false, 
     });
     useEffect(() => {
-        refetch({ id: params.id || '123' });
+        refetch({ id: params.id || '123', username: params.username || "user" });
         if(data){
             dispatch(userActions.setUser(data.user)); 
         }
@@ -32,7 +32,8 @@ export const Home=()=>{
                   id,
                   balance,
                   power,
-                  level
+                  level,
+                  level_target
                 },
               })
               .then(response => {

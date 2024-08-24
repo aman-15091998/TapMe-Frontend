@@ -29,17 +29,19 @@ export const TapComponent=()=>{
 
         // Update the transform origin
         setTransformOrigin({x:String(originX), y:String(originY)});
-        const newClick = {
-            id: Date.now(),
-            x: offsetX-30,
-            y: offsetY,
-          };
-          setClicks((prev) => [...prev, newClick]);
-      
-          // Remove the click after the animation ends
-          setTimeout(() => {
-            setClicks((prev) => prev.filter((click) => click.id !== newClick.id));
-          }, 1000);
+        if(power>0){
+            const newClick = {
+                id: Date.now(),
+                x: offsetX-30,
+                y: offsetY,
+            };
+            setClicks((prev) => [...prev, newClick]);
+        
+            // Remove the click after the animation ends
+            setTimeout(() => {
+                setClicks((prev) => prev.filter((click) => click.id !== newClick.id));
+            }, 1000);
+        }
         dispatch(userActions.updateBalance());
     }
     return (
