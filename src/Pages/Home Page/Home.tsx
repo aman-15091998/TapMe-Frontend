@@ -11,12 +11,13 @@ import { useParams } from 'react-router-dom';
 
 export const Home=()=>{
     const dispatch=useDispatch();
-    const params=useParams();
-    const {id, balance, power, level, level_target}=useSelector(userSelector);
-    const { loading, error, data, refetch } = useQuery(GET_USER, {
+    const params=useParams();//for reading url params
+    const {id, balance, power, level, level_target}=useSelector(userSelector);//reading data from the store
+    const { loading, error, data, refetch } = useQuery(GET_USER, {//query
         variables: { id: params.id || '123', username: params.username || "user" },
         skip: false, 
     });
+    //Side effect to update the user state in the store whenever new data is fetched
     useEffect(() => {
         refetch({ id: params.id || '123', username: params.username || "user" });
         if(data){
@@ -24,7 +25,8 @@ export const Home=()=>{
         }
     }, [data]);
 
-    const [updateUser] = useMutation(UPDATE_USER);
+    const [updateUser] = useMutation(UPDATE_USER);//mutation query
+    //Side effect to update the user properties in the database whenever user's balance state changes in the store
     useEffect(()=>{
         if(id!=null){
             updateUser({

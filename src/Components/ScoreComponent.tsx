@@ -4,7 +4,7 @@ import { userSelector } from "../redux/userSlice";
 import { useEffect } from "react";
 
 export const ScoreComponent=()=>{
-    const {balance, level_target, level, tap_value}=useSelector(userSelector);
+    const {balance, level_target, level, tap_value}=useSelector(userSelector); //reading states from the store
 
     useEffect(()=>{
 

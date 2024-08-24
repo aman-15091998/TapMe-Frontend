@@ -10,24 +10,22 @@ interface ClickData {
   }
 
 export const TapComponent=()=>{
-    const {power, tap_value}=useSelector(userSelector);
-    const [transformOrigin, setTransformOrigin] = useState({x:'50%', y:'50%'});
-    const [clicks, setClicks]=useState<ClickData[]>([]);
+    const {power, tap_value}=useSelector(userSelector); //reading states from store
+    const [transformOrigin, setTransformOrigin] = useState({x:'50%', y:'50%'}); //for storing x,y position
+    const [clicks, setClicks]=useState<ClickData[]>([]);                      //for cstoring the click with positions
     const dispatch=useDispatch();
 
     const handleClick=(e:any)=>{
         const img = e.target;
         const rect = img.getBoundingClientRect();
 
-        // Calculate the click position relative to the image dimensions
-        const offsetX = e.clientX - rect.left; // X coordinate relative to the image
-        const offsetY = e.clientY - rect.top;  // Y coordinate relative to the image
+        const offsetX = e.clientX - rect.left; //X coordinate relative to the image
+        const offsetY = e.clientY - rect.top;  //Y coordinate relative to the image
 
-        // Calculate the transform origin in percentage
         const originX = (offsetX / rect.width) * 100;
         const originY = (offsetY / rect.height) * 100;
 
-        // Update the transform origin
+        //Updating the transform origin
         setTransformOrigin({x:String(originX), y:String(originY)});
         if(power>0){
             const newClick = {
@@ -37,7 +35,7 @@ export const TapComponent=()=>{
             };
             setClicks((prev) => [...prev, newClick]);
         
-            // Remove the click after the animation ends
+            //Removing the clicks after the animation ends
             setTimeout(() => {
                 setClicks((prev) => prev.filter((click) => click.id !== newClick.id));
             }, 1000);

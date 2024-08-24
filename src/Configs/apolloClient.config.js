@@ -5,7 +5,7 @@ export const client = new ApolloClient({
     cache: new InMemoryCache(),
   });
 
-
+//Query for getting the user from the db
   export const GET_USER = gql`
   query GetUser($id: String!, $username: String!) {
       user(id: $id, username: $username) {
@@ -20,7 +20,7 @@ export const client = new ApolloClient({
       }
   }
   `;
-
+//Query for updating the user in the db
   export const UPDATE_USER = gql`
     mutation UpdateUser($id: String!, $balance: Int!, $power: Int!, $level: Int!, $level_target: Int!) {
       updateUser(id: $id, balance: $balance, power: $power, level: $level, level_target: $level_target) {
