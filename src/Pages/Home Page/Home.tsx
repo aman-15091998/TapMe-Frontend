@@ -17,6 +17,11 @@ export const Home=()=>{
         variables: { id: params.id || '123', username: params.username || "user" },
         skip: false, 
     });
+    useEffect(() => {
+        if (window.Telegram && window.Telegram.WebApp) {
+          window.Telegram.WebApp.expand();  // Expands the Web App to full screen
+        }
+      }, []);
     //Side effect to update the user state in the store whenever new data is fetched
     useEffect(() => {
         refetch({ id: params.id || '123', username: params.username || "user" });
